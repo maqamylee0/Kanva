@@ -1,4 +1,0 @@
-/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/student/2019/cs19resch11003/kanva
--- Configuring done
--- Generating done
--- Build files have been written to: /home/student/2019/cs19resch11003/kanva/cmake-build-debug
