@@ -1,7 +1,3 @@
-//
-// Created by gaurav on 5/8/22.
-//
-
 #ifndef KANVA_FUNCTIONS_H
 #define KANVA_FUNCTIONS_H
 
@@ -53,7 +49,6 @@ inline void parse_args(int argc, char **argv) {
             {"insert", required_argument, 0, 'b'},
             {"remove", required_argument, 0, 'c'},
             {"ds", required_argument, 0, 'd'},
-            {"item_num", required_argument, 0, 'e'},
             {"runtime", required_argument, 0, 'f'},
             {"thread_num", required_argument, 0, 'g'},
             {"benchmark", required_argument, 0, 'h'},
@@ -87,10 +82,6 @@ inline void parse_args(int argc, char **argv) {
             case 'd':
                 Config.ds = strtod(optarg, NULL);
                 INVARIANT(Config.ds >= 0 && Config.ds <= 5);
-                break;
-            case 'e':
-                Config.item_num = strtoul(optarg, NULL, 10);
-                INVARIANT(Config.item_num > 0);
                 break;
             case 'f':
                 Config.runtime = strtoul(optarg, NULL, 10);
@@ -148,34 +139,34 @@ void load_data() {
             wiki_ts_200M_uint64();
             break;
         case 7:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loada_uniform.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runa_uniform.txt");
+            load_ycsb("../workload/loada_uniform.txt");
+            run_ycsb("../workload/runa_uniform.txt");
             COUT_THIS("load workloada_uniform");
             break;
         case 8:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loadb_uniform.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runb_uniform.txt");
+            load_ycsb("../workload/loadb_uniform.txt");
+            run_ycsb("../runb_uniform.txt");
             COUT_THIS("load workloadb_uniform");
             break;
         case 9:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loadc_uniform.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runc_uniform.txt");
+            load_ycsb("../workload/loadc_uniform.txt");
+            run_ycsb("../workload/runc_uniform.txt");
             COUT_THIS("load workloadc_uniform");
             break;
         case 10:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loada_ziphian.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runa_ziphian.txt");
+            load_ycsb("../workload/loada_ziphian.txt");
+            run_ycsb("../workload/runa_ziphian.txt");
             COUT_THIS("load workloada_ziphian");
             break;
             break;
         case 11:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loadb_ziphian.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runb_ziphian.txt");
+            load_ycsb("../workload/loadb_ziphian.txt");
+            run_ycsb("../workload/runb_ziphian.txt");
             COUT_THIS("load workloadb_ziphian");
             break;
         case 12:
-            load_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/loadc_ziphian.txt");
-            run_ycsb("/home/student/2019/cs19resch11003/YCSB/ycsb-0.17.0/workload/runc_ziphian.txt");
+            load_ycsb("../workload/loadc_ziphian.txt");
+            run_ycsb("../workload/runc_ziphian.txt");
             COUT_THIS("load workloadc_ziphian");
             break;
         case 13:
@@ -198,7 +189,7 @@ void load_data() {
 
 void books_200M_uint64() {
     std::cout << "books_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/books_200M_uint64";
+    std::string filename = "../data/books_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -228,7 +219,7 @@ void books_200M_uint64() {
 
 void fb_200M_uint64() {
     std::cout << "fb_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/fb_200M_uint64";
+    std::string filename = "../data/fb_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -256,7 +247,7 @@ void fb_200M_uint64() {
 
 void lognormal_200M_uint64() {
     std::cout << "lognormal_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/lognormal_200M_uint64";
+    std::string filename = "../data/lognormal_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -284,7 +275,7 @@ void lognormal_200M_uint64() {
 
 void normal_200M_uint64() {
     std::cout << "normal_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/normal_200M_uint64";
+    std::string filename = "../data/normal_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -312,7 +303,7 @@ void normal_200M_uint64() {
 
 void osm_cellids_200M_uint64() {
     std::cout << "osm_cellids_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/osm_cellids_200M_uint64";
+    std::string filename = "../data/osm_cellids_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -340,7 +331,7 @@ void osm_cellids_200M_uint64() {
 
 void uniform_dense_200M_uint64() {
     std::cout << "uniform_dense_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/uniform_dense_200M_uint64";
+    std::string filename = "../data/uniform_dense_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -367,7 +358,7 @@ void uniform_dense_200M_uint64() {
 
 void uniform_sparse_200M_uint64(){
     std::cout<<"uniform_sparse_200M_uint64\n";
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/uniform_sparse_200M_uint64";
+    std::string filename = "../data/uniform_sparse_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -393,7 +384,7 @@ void uniform_sparse_200M_uint64(){
 }
 
 void wiki_ts_200M_uint64() {
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/wiki_ts_200M_uint64";
+    std::string filename = "../data/wiki_ts_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -469,7 +460,6 @@ void run_ycsb(const char *path) {
     if ((ycsb = fopen(path, "r")) == NULL) {
         perror("fail to read");
     }
-//    YCSBconfig.operate_queue = (operation_item *) malloc(YCSBconfig.operate_num * sizeof(operation_item));
 
     while (getline(&buf, &len, ycsb) != -1) {
         if (strncmp(buf, "READ", 4) == 0) {
@@ -523,13 +513,12 @@ void run_ycsb(const char *path) {
     std::cerr << "insert: " << insert_i << std::endl;
     std::cerr << "update: " << update_i << std::endl;
     std::cerr << "remove: " << delete_i << std::endl;
-    std::cerr << "  scan: " << scan_i << std::endl;
     std::cout<<"Total Item::  "<<item_num<<"   "<<YCSBconfig.operate_num<<"\n";
 }
 
 void skew_data()
 {
-    std::string filename = "/home/student/2019/cs19resch11003/Learned_Index/SOSD-master/data/uniform_sparse_200M_uint64";
+    std::string filename = "../data/uniform_sparse_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;

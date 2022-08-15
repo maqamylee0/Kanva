@@ -1,23 +1,20 @@
-#include <random>
-#include <thread>
-#include <fstream>
-#include <cassert>
-#include <unistd.h>
-#include <algorithm>
-#include <vector>
-#include "Elim-AB-Tree/adapter.h"
+#include <iostream>
 #include "functions.h"
-
-const int NUM_THREADS = 160;
-const int KEY_ANY = 0;
-const int unused1 = 0;
-void * unused2 = NULL;
-RandomFNV1A * const unused3 = NULL;
-
-auto Tree = new ds_adapter<int, void *>(NUM_THREADS, KEY_ANY, unused1, unused2, unused3);
+#include <limits>
+#include <cassert>
+#include <fstream>
+#include "thread"
+#include "CIST/adapter.h"
 
 struct alignas(CACHELINE_SIZE) ThreadParam;
 typedef ThreadParam thread_param_t;
+const int NUM_THREADS = Config.thread_num;
+const uint64_t KEY_ANY = 0;
+const uint64_t unused1 = 0;
+void * unused2 = NULL;
+Random64 * const unused3 = NULL;
+
+auto tree = new ds_adapter<int64_t , void *>(NUM_THREADS, KEY_ANY, unused1, unused2, unused3);
 
 volatile bool running = false;
 std::atomic<size_t> ready_threads(0);
@@ -35,15 +32,10 @@ std::ofstream fout;
 int main(int argc, char **argv) {
     parse_args(argc, argv);
     load_data();
-    for(int i = 0; i < NUM_THREADS; i++){
-        Tree -> initThread(i);
-    }
     prepare();
     run_benchmark();
+    delete tree;
     fout.close();
-    for(int i = 0; i < NUM_THREADS; i++){
-        Tree -> deinitThread(i);
-    }
     return 0;
 }
 
@@ -53,22 +45,23 @@ void prepare(){
     TIMER_DECLARE(0);
     TIMER_BEGIN(0);
     size_t maxErr = 4;
-    Tree ->initThread(150);
+    tree ->initThread(0);
     for(int i = 0; i < exist_keys.size(); i++)
-        Tree->insertIfAbsent(150, exist_keys[i], (void*) 10);
-    Tree->deinitThread(150);
+        tree->insertIfAbsent(0, exist_keys[i], (void*)10);
+    tree->deinitThread(0);
     TIMER_END_S(0,time_s);
     printf("%8.1lf s : %.40s\n", time_s, "Table Preparation");
 }
-
 void run_benchmark() {
     std::thread threads[Config.thread_num];
     thread_param_t thread_params[Config.thread_num];
+    // check if parameters are cacheline aligned
     for (size_t i = 0; i < Config.thread_num; i++) {
         if ((uint64_t)(&(thread_params[i])) % CACHELINE_SIZE != 0) {
             COUT_N_EXIT("wrong parameter address: " << &(thread_params[i]));
         }
     }
+
     running = false;
     int64_t numa1 = 0, numa2 = 32, numa3 = 64, numa4 = 96;
     for(size_t worker_i = 0; worker_i < Config.thread_num; worker_i++){
@@ -122,13 +115,13 @@ void run_benchmark() {
     for (auto &p : thread_params) {
         throughput += p.throughput;
     }
-    COUT_THIS("[micro] Throughput(op/s): " << (uint64_t)(throughput / time_s));
+    COUT_THIS("[micro] Throughput(op/s): " << throughput / time_s);
 }
 
 void *run_fg(void *param) {
     thread_param_t &thread_param = *(thread_param_t *)param;
     uint32_t thread_id = thread_param.thread_id;
-    Tree->initThread(thread_id);
+    tree->initThread(thread_id);
     size_t key_n_per_thread = YCSBconfig.operate_num / Config.thread_num;
     size_t key_start = thread_id * key_n_per_thread;
     size_t key_end = (thread_id + 1) * key_n_per_thread;
@@ -137,17 +130,18 @@ void *run_fg(void *param) {
     ready_threads++;
     volatile result_t res = result_t::failed;
     val_type dummy_value = 1234;
+
     while (!running)
         ;
     for(int i=key_start; i<key_end; i++) {
         operation_item opi = YCSBconfig.operate_queue[i];
         if(opi.op == 0){     // read
-            Tree->find(thread_id, opi.key);
+            tree->find(thread_id, opi.key);
         } else if (opi.op == 1) {
-            Tree->insertIfAbsent(thread_id, opi.key, (void *)10);
+            tree->insertIfAbsent(thread_id, opi.key, (void *)10);
         }
         else if (opi.op == 3) {
-            Tree->erase(thread_id, opi.key);
+            tree->erase(thread_id, opi.key);
         }
         thread_param.throughput++;
     }

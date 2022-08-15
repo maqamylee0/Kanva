@@ -92,16 +92,7 @@ void run_benchmark(DS *ds, size_t sec) {
     running = true;
     std::vector<size_t> tput_history(Config.thread_num, 0);
     size_t current_sec = 0;
-    while (current_sec < sec) {
-        sleep(1);
-        uint64_t tput = 0;
-        for (size_t i = 0; i < Config.thread_num; i++) {
-            tput += thread_params[i].throughput - tput_history[i];
-            tput_history[i] = thread_params[i].throughput;
-        }
-        COUT_THIS("[micro] >>> sec " << current_sec << " throughput: " << (uint64_t)tput);
-        current_sec++;
-    }
+    sleep(sec);
     running = false;
     void *status;
     for (size_t i = 0; i < Config.thread_num; i++) {

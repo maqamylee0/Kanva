@@ -1,6 +1,3 @@
-//
-// Created by gaurav on 6/8/22.
-//
 
 #ifndef KANVA_LR_MODEL_H
 #define KANVA_LR_MODEL_H

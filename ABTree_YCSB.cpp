@@ -5,14 +5,14 @@
 #include <unistd.h>
 #include <algorithm>
 #include <vector>
-#include "Elim-AB-Tree/adapter.h"
+#include "AB-Tree/adapter.h"
 #include "functions.h"
 
-const int NUM_THREADS = 160;
+const int NUM_THREADS = std::thread::hardware_concurrency();;
 const int KEY_ANY = 0;
 const int unused1 = 0;
 void * unused2 = NULL;
-RandomFNV1A * const unused3 = NULL;
+Random64 * const unused3 = NULL;
 
 auto Tree = new ds_adapter<int, void *>(NUM_THREADS, KEY_ANY, unused1, unused2, unused3);
 
@@ -53,10 +53,10 @@ void prepare(){
     TIMER_DECLARE(0);
     TIMER_BEGIN(0);
     size_t maxErr = 4;
-    Tree ->initThread(150);
+    Tree ->initThread(NUM_THREADS - 1);
     for(int i = 0; i < exist_keys.size(); i++)
-        Tree->insertIfAbsent(150, exist_keys[i], (void*) 10);
-    Tree->deinitThread(150);
+        Tree->insert(NUM_THREADS - 1, exist_keys[i], (void*) 10);
+    Tree->deinitThread(NUM_THREADS - 1);
     TIMER_END_S(0,time_s);
     printf("%8.1lf s : %.40s\n", time_s, "Table Preparation");
 }
@@ -69,6 +69,7 @@ void run_benchmark() {
             COUT_N_EXIT("wrong parameter address: " << &(thread_params[i]));
         }
     }
+
     running = false;
     int64_t numa1 = 0, numa2 = 32, numa3 = 64, numa4 = 96;
     for(size_t worker_i = 0; worker_i < Config.thread_num; worker_i++){
@@ -105,7 +106,6 @@ void run_benchmark() {
 
     COUT_THIS("[micro] prepare data ...");
     while (ready_threads < Config.thread_num) sleep(0.5);
-
     double time_ns;
     double time_s;
     TIMER_DECLARE(1);
@@ -128,7 +128,7 @@ void run_benchmark() {
 void *run_fg(void *param) {
     thread_param_t &thread_param = *(thread_param_t *)param;
     uint32_t thread_id = thread_param.thread_id;
-    Tree->initThread(thread_id);
+//    aidel_type *ai = thread_param.ai;
     size_t key_n_per_thread = YCSBconfig.operate_num / Config.thread_num;
     size_t key_start = thread_id * key_n_per_thread;
     size_t key_end = (thread_id + 1) * key_n_per_thread;

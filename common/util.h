@@ -1,7 +1,3 @@
-//
-// Created by gaurav on 5/8/22.
-//
-
 #ifndef KANVA_UTIL_H
 #define KANVA_UTIL_H
 #include <getopt.h>
