@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Sunanda (5b491722-a3d7-4cb9-8832-8d25ed3dc6df)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/student/2019/cs19resch11003/PPOPP/Elim-AB-Tree" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Varuna (33a60a6d-6cca-4eaa-b790-dfd1405234b1)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.g95kqCnKyY" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
