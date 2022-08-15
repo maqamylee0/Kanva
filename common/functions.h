@@ -139,34 +139,34 @@ void load_data() {
             wiki_ts_200M_uint64();
             break;
         case 7:
-            load_ycsb("../workload/loada_uniform.txt");
-            run_ycsb("../workload/runa_uniform.txt");
+            load_ycsb("workload/loada_uniform.txt");
+            run_ycsb("workload/runa_uniform.txt");
             COUT_THIS("load workloada_uniform");
             break;
         case 8:
-            load_ycsb("../workload/loadb_uniform.txt");
-            run_ycsb("../runb_uniform.txt");
+            load_ycsb("workload/loadb_uniform.txt");
+            run_ycsb("workload/runb_uniform.txt");
             COUT_THIS("load workloadb_uniform");
             break;
         case 9:
-            load_ycsb("../workload/loadc_uniform.txt");
-            run_ycsb("../workload/runc_uniform.txt");
+            load_ycsb("workload/loadc_uniform.txt");
+            run_ycsb("workload/runc_uniform.txt");
             COUT_THIS("load workloadc_uniform");
             break;
         case 10:
-            load_ycsb("../workload/loada_ziphian.txt");
-            run_ycsb("../workload/runa_ziphian.txt");
+            load_ycsb("workload/loada_ziphian.txt");
+            run_ycsb("workload/runa_ziphian.txt");
             COUT_THIS("load workloada_ziphian");
             break;
             break;
         case 11:
-            load_ycsb("../workload/loadb_ziphian.txt");
-            run_ycsb("../workload/runb_ziphian.txt");
+            load_ycsb("workload/loadb_ziphian.txt");
+            run_ycsb("workload/runb_ziphian.txt");
             COUT_THIS("load workloadb_ziphian");
             break;
         case 12:
-            load_ycsb("../workload/loadc_ziphian.txt");
-            run_ycsb("../workload/runc_ziphian.txt");
+            load_ycsb("workload/loadc_ziphian.txt");
+            run_ycsb("workload/runc_ziphian.txt");
             COUT_THIS("load workloadc_ziphian");
             break;
         case 13:
@@ -189,7 +189,7 @@ void load_data() {
 
 void books_200M_uint64() {
     std::cout << "books_200M_uint64\n";
-    std::string filename = "../data/books_200M_uint64";
+    std::string filename = "data/books_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -219,7 +219,7 @@ void books_200M_uint64() {
 
 void fb_200M_uint64() {
     std::cout << "fb_200M_uint64\n";
-    std::string filename = "../data/fb_200M_uint64";
+    std::string filename = "data/fb_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -247,7 +247,7 @@ void fb_200M_uint64() {
 
 void lognormal_200M_uint64() {
     std::cout << "lognormal_200M_uint64\n";
-    std::string filename = "../data/lognormal_200M_uint64";
+    std::string filename = "data/lognormal_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -275,7 +275,7 @@ void lognormal_200M_uint64() {
 
 void normal_200M_uint64() {
     std::cout << "normal_200M_uint64\n";
-    std::string filename = "../data/normal_200M_uint64";
+    std::string filename = "data/normal_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -303,7 +303,7 @@ void normal_200M_uint64() {
 
 void osm_cellids_200M_uint64() {
     std::cout << "osm_cellids_200M_uint64\n";
-    std::string filename = "../data/osm_cellids_200M_uint64";
+    std::string filename = "data/osm_cellids_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -331,7 +331,7 @@ void osm_cellids_200M_uint64() {
 
 void uniform_dense_200M_uint64() {
     std::cout << "uniform_dense_200M_uint64\n";
-    std::string filename = "../data/uniform_dense_200M_uint64";
+    std::string filename = "data/uniform_dense_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -358,7 +358,7 @@ void uniform_dense_200M_uint64() {
 
 void uniform_sparse_200M_uint64(){
     std::cout<<"uniform_sparse_200M_uint64\n";
-    std::string filename = "../data/uniform_sparse_200M_uint64";
+    std::string filename = "data/uniform_sparse_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -384,7 +384,7 @@ void uniform_sparse_200M_uint64(){
 }
 
 void wiki_ts_200M_uint64() {
-    std::string filename = "../data/wiki_ts_200M_uint64";
+    std::string filename = "data/wiki_ts_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
@@ -518,7 +518,7 @@ void run_ycsb(const char *path) {
 
 void skew_data()
 {
-    std::string filename = "../data/uniform_sparse_200M_uint64";
+    std::string filename = "data/uniform_sparse_200M_uint64";
     std::ifstream in(filename, std::ios::binary);
     if (!in.is_open()) {
         std::cout << "unable to open " << filename << std::endl;
