@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/Kanva_benchmark.dir/Kanva_benchmark.cpp.o  -o Kanva_benchmark -lpthread 

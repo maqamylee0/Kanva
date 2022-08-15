@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Kanva"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Finedex_YCSB">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Finedex_YCSB" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Finedex_YCSB"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Finedex_YCSB/fast">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Finedex_YCSB" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Finedex_YCSB/fast"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Kanva_ycsb">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Kanva_ycsb" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kanva_ycsb"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Kanva_ycsb/fast">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Kanva_ycsb" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kanva_ycsb/fast"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Finedex_benchmark">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Finedex_benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Finedex_benchmark"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Finedex_benchmark/fast">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Finedex_benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Finedex_benchmark/fast"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Kanva_benchmark">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Kanva_benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kanva_benchmark"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Kanva_benchmark/fast">
+				<Option output="/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Kanva_benchmark" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/student/2019/cs19resch11003/kanva/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/Kanva_impl"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/recordmgr"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/papi"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/kcas"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/descriptors"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/dcss"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/atomic_ops"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rlu"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/rq"/>
+					<Add directory="/home/student/2019/cs19resch11003/kanva/common_TB/urcu"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 Kanva_benchmark/fast"/>
+					<CompileFile command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j128 -f &quot;/home/student/2019/cs19resch11003/kanva/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/student/2019/cs19resch11003/kanva/Finedex_benchmark_YCSB.cpp">
+			<Option target="Finedex_YCSB"/>
+		</Unit>
+		<Unit filename="/home/student/2019/cs19resch11003/kanva/Kanva_benchmark.cpp">
+			<Option target="Kanva_benchmark"/>
+		</Unit>
+		<Unit filename="/home/student/2019/cs19resch11003/kanva/Kanva_benchmark_ycsb.cpp">
+			<Option target="Kanva_ycsb"/>
+		</Unit>
+		<Unit filename="/home/student/2019/cs19resch11003/kanva/finedex_benchmark.cpp">
+			<Option target="Finedex_benchmark"/>
+		</Unit>
+		<Unit filename="/home/student/2019/cs19resch11003/kanva/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

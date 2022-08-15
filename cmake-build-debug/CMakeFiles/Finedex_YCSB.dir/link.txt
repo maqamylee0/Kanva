@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/Finedex_YCSB.dir/Finedex_benchmark_YCSB.cpp.o  -o Finedex_YCSB -lpthread 

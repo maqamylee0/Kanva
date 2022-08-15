@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/Finedex_benchmark.dir/finedex_benchmark.cpp.o  -o Finedex_benchmark -lpthread 

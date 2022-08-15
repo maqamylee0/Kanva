@@ -1,0 +1,6 @@
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/Finedex_YCSB.dir
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/Kanva_ycsb.dir
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/Finedex_benchmark.dir
+/home/student/2019/cs19resch11003/kanva/cmake-build-debug/CMakeFiles/Kanva_benchmark.dir

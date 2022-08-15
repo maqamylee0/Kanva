@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Bin_LL.dir/main.cpp.o  -o Bin_LL -pthread 
