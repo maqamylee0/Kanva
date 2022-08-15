@@ -1,7 +1,3 @@
-//
-// Created by gaurav on 15/7/22.
-//
-
 #ifndef BIN_LEVEL_INDEX_H
 #define BIN_LEVEL_INDEX_H
 #include "BIn.h"
