@@ -1,6 +1,3 @@
-//
-// Created by gaurav on 23/7/22.
-//
 
 #ifndef BIN_LL_ROOT_NODE_H
 #define BIN_LL_ROOT_NODE_H

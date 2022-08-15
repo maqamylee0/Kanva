@@ -1,7 +1,3 @@
-//
-// Created by gaurav on 6/8/22.
-//
-
 #ifndef KANVA_KANVA_IMPL_H
 #define KANVA_KANVA_IMPL_H
 #include "kanva.h"

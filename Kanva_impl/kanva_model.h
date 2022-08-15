@@ -1,7 +1,3 @@
-//
-// Created by gaurav on 6/8/22.
-//
-
 #ifndef KANVA_KANVA_MODEL_H
 #define KANVA_KANVA_MODEL_H
 #include "lr_model.h"
