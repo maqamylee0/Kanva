@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(Kanva)
 
 set(CMAKE_CXX_STANDARD 17)
-include_directories(common Kanva_impl)
+include_directories(common Kanva_impl Kanva_RS)
 include_directories(common_TB
         common_TB/recordmgr
         common_TB/papi
@@ -33,3 +33,5 @@ add_executable(ElimABtree_benchmark ElimABTree_benchmark.cpp)
 target_link_libraries(ElimABtree_benchmark pthread)
 add_executable(ElimABtree_YCSB ElimABtree_YCSB.cpp)
 target_link_libraries(ElimABtree_YCSB pthread)
+add_executable(Kanva_benchmark_RS_MR Kanva_benchmark_RS_MR.cpp)
+target_link_libraries(Kanva_benchmark_RS_MR pthread)
