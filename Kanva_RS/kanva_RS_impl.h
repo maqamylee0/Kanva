@@ -8,7 +8,6 @@
 #include "piecewise_linear_model.h"
 
 
-namespace kanva_RS {
 
 template<class key_t, class val_t>
 inline Kanva_RS<key_t, val_t>::Kanva_RS(int num_threads)
@@ -207,7 +206,7 @@ inline result_t Kanva_RS<key_t, val_t>::find(const key_t &key, val_t &val, threa
 
 // =================  scan ====================
 template<class key_t, class val_t>
-int Kanva_RS<key_t, val_t>::scan(const key_t &key, const size_t n, std::vector<std::pair<key_t, val_t>> &result, thread_id_t tid)
+int Kanva_RS<key_t, val_t>::rangequery(const key_t &key, const size_t n, std::vector<std::pair<key_t, val_t>> &result, thread_id_t tid)
 {       
     //int ts=((version_tracker.add_timestamp()))->ts;
     TrackerNode* tracker_node = version_tracker.add_timestamp();
@@ -222,8 +221,7 @@ int Kanva_RS<key_t, val_t>::scan(const key_t &key, const size_t n, std::vector<s
     }
     tracker_node->finish = true;
     return remaining;
-    
-    //TODO:Range Query
+
 }
 
 
@@ -281,7 +279,6 @@ size_t Kanva_RS<key_t, val_t>::model_size(thread_id_t tid){
 
 
 
-}    // namespace kanva_RS
 
 
 #endif

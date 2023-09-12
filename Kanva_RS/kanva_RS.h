@@ -19,7 +19,6 @@ TrackerList version_tracker;
 
 
 
-namespace kanva_RS {
 
 template<class key_t, class val_t>
 class Kanva_RS{
@@ -47,7 +46,7 @@ public:
 
 public:
     inline Kanva_RS(int num_threads);
-    //inline Kanva_RS(int _maxErr, int _learning_step, float _learning_rate, ll_record_manager_t *__llRecMgr, vnode_record_manager_t *__vnodeRecMgr);
+    inline Kanva_RS(int _maxErr, int _learning_step, float _learning_rate, ll_record_manager_t *__llRecMgr, vnode_record_manager_t *__vnodeRecMgr);
     ~Kanva_RS();
     void train(const std::vector<key_t> &keys, const std::vector<val_t> &vals, size_t _maxErr, thread_id_t tid);
     void train_opt(const std::vector<key_t> &keys, const std::vector<val_t> &vals, size_t _maxErr, thread_id_t tid);
@@ -60,7 +59,7 @@ public:
     inline result_t insert(const key_t &key, const val_t &val, thread_id_t tid);
     inline result_t update(const key_t &key, const val_t &val, thread_id_t tid);
     inline result_t remove(const key_t &key, thread_id_t tid);
-    int scan(const key_t &key, const size_t n, std::vector<std::pair<key_t, val_t>> &result, thread_id_t tid);
+    int rangequery(const key_t &key, const size_t n, std::vector<std::pair<key_t, val_t>> &result, thread_id_t tid);
     size_t model_size(thread_id_t tid);
 
 
@@ -90,7 +89,6 @@ private:
 
 };
 
-}   // namespace kanva_RS
 
 
 #endif
