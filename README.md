@@ -3,7 +3,9 @@ Kanva:: Lock-Free learned Data Structure
 Dependencies to prepare the Dataset
 
 sudo apt -y update
+
 sudo apt -y install zstd python3-pip m4 cmake clang libboost-all-dev
+
 pip3 install --user numpy scipy
 
 ## Preparing the Dataset
