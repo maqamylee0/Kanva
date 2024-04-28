@@ -1,4 +1,4 @@
-Kanva:: Lock-Free learned Data Structure
+Kanva:: Learned Lock-Free Data Structure
 
 Dependencies to prepare the Dataset
 
