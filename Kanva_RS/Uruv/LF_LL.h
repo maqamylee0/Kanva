@@ -15,21 +15,21 @@
 // without sentinel
 #define threshhold 10
 
-template <typename K, typename V>
+template <typename KeyT, typename ValT>
 class Linked_List
 {
 public:
     typedef record_manager<
-        reclaimer_debra<K>,
-        allocator_new<K>,
-        pool_none<K>,
-        ll_Node<K, V>>
+        reclaimer_debra<KeyT>,
+        allocator_new<KeyT>,
+        pool_none<KeyT>,
+        ll_Node<KeyT, ValT>>
         ll_record_manager_t;
     typedef record_manager<
-        reclaimer_debra<K>,
-        allocator_new<K>,
-        pool_none<K>,
-        Vnode<V>>
+        reclaimer_debra<KeyT>,
+        allocator_new<KeyT>,
+        pool_none<KeyT>,
+        Vnode<ValT>>
         vnode_record_manager_t;
 
     ll_record_manager_t *llRecMgr = nullptr;
@@ -37,12 +37,12 @@ public:
 
     bool isReclaimed=false;
 
-    ll_Node<K, V> *head;
+    ll_Node<KeyT, ValT> *head;
     std::atomic<size_t> size = 0;
     /*Linked_List()
     {
-        ll_Node<K, V> *max = new ll_Node<K, V>(std::numeric_limits<K>::max(), 0);
-        ll_Node<K, V> *min = new ll_Node<K, V>(std::numeric_limits<K>::min(), 0);
+        ll_Node<KeyT, ValT> *max = new ll_Node<KeyT, ValT>(std::numeric_limits<KeyT>::max(), 0);
+        ll_Node<KeyT, ValT> *min = new ll_Node<KeyT, ValT>(std::numeric_limits<KeyT>::min(), 0);
         min->next.store(max);
         head = min;
     }*/
@@ -50,31 +50,31 @@ public:
     {
         llRecMgr = __llRecMgr;
         vnodeRecMgr = __vnodeRecMgr;
-        ll_Node<K, V> *max = llRecMgr->template allocate<ll_Node<K, V>>(tid);
-        ll_Node<K, V> *min = llRecMgr->template allocate<ll_Node<K, V>>(tid);
-        max->init(std::numeric_limits<K>::max(), 0);
-        min->init(std::numeric_limits<K>::min(), 0);
+        ll_Node<KeyT, ValT> *max = llRecMgr->template allocate<ll_Node<KeyT, ValT>>(tid);
+        ll_Node<KeyT, ValT> *min = llRecMgr->template allocate<ll_Node<KeyT, ValT>>(tid);
+        max->init(std::numeric_limits<KeyT>::max(), 0);
+        min->init(std::numeric_limits<KeyT>::min(), 0);
         min->next.store(max);
         head = min;
     }
     int64_t count();
 
-    int insert(K Key, V value, TrackerList *version_tracker, thread_id_t tid);
-    int remove(K key, TrackerList *version_tracker, thread_id_t tid);
+    int insert(KeyT Key, ValT value, TrackerList *version_tracker, thread_id_t tid);
+    int remove(KeyT key, TrackerList *version_tracker, thread_id_t tid);
 
-    // bool search(K key, V value);
-    bool search(K key, V value, thread_id_t tid);
+    // bool search(KeyT key, ValT value);
+    bool search(KeyT key, ValT value, thread_id_t tid);
 
-    bool collect(std::vector<K> *,std::vector<Vnode<V> *>*,  thread_id_t tid);
+    bool collect(std::vector<KeyT> *,std::vector<Vnode<ValT> *>*,  thread_id_t tid);
 
-    int range_query(int64_t low, int64_t remaining, int64_t curr_ts, std::vector<std::pair<K, V>> &res, TrackerList *version_tracker, thread_id_t tid);
+    int range_query(int64_t low, int64_t remaining, int64_t curr_ts, std::vector<std::pair<KeyT, ValT>> &res, TrackerList *version_tracker, thread_id_t tid);
 
-    // ll_Node<K, V> *find(K key, ll_Node<K, V> **);
-    ll_Node<K, V> *find(K key, ll_Node<K, V> **, thread_id_t tid);
+    // ll_Node<KeyT, ValT> *find(KeyT key, ll_Node<KeyT, ValT> **);
+    ll_Node<KeyT, ValT> *find(KeyT key, ll_Node<KeyT, ValT> **, thread_id_t tid);
 
     void reclaimMem(int64_t tstamp_threshold, thread_id_t tid);
 
-    void init_ts(Vnode<V> *node, TrackerList *version_tracker, thread_id_t tid)
+    void init_ts(Vnode<ValT> *node, TrackerList *version_tracker, thread_id_t tid)
     {
         auto guard = llRecMgr->getGuard(tid);
         if (node->ts.load(std::memory_order_seq_cst) == -1)
@@ -84,24 +84,24 @@ public:
             node->ts.compare_exchange_strong(invalid_ts, global_ts, std::memory_order_seq_cst, std::memory_order_seq_cst);
         }
     }
-    V read(ll_Node<K, V> *node, TrackerList *version_tracker, thread_id_t tid)
+    ValT read(ll_Node<KeyT, ValT> *node, TrackerList *version_tracker, thread_id_t tid)
     {
         auto guard = llRecMgr->getGuard(tid);
         init_ts(node->vhead, version_tracker, tid);
         return node->vhead.load(std::memory_order_seq_cst)->value;
     }
 
-    bool vCAS(ll_Node<K, V> *node, V old_value, V new_value, TrackerList *version_tracker, thread_id_t tid)
+    bool vCAS(ll_Node<KeyT, ValT> *node, ValT old_value, ValT new_value, TrackerList *version_tracker, thread_id_t tid)
     {
         auto guard = llRecMgr->getGuard(tid);
-        Vnode<V> *head = (Vnode<V> *)unset_mark((uintptr_t)node->vhead.load(std::memory_order_seq_cst));
+        Vnode<ValT> *head = (Vnode<ValT> *)unset_mark((uintptr_t)node->vhead.load(std::memory_order_seq_cst));
         init_ts(head, version_tracker, tid);
         if (head->value != old_value)
             return false;
         if (head->value == new_value)
             return true;
-        // Vnode<V> *new_node = new Vnode<V>(new_value, head);
-        Vnode<V> *new_node = vnodeRecMgr->template allocate<Vnode<V>>(tid);
+        // Vnode<ValT> *new_node = new Vnode<ValT>(new_value, head);
+        Vnode<ValT> *new_node = vnodeRecMgr->template allocate<Vnode<ValT>>(tid);
         new_node->init(new_value, head);
         if (expt_sleep)
         {
@@ -124,7 +124,7 @@ public:
         return false;
     }
 
-    bool vCAS(ll_Node<K, V> *node, V old_value, V new_value, Vnode<V> *new_node, Vnode<V> *head, Vnode<V> *vnext, TrackerList *version_tracker, thread_id_t tid)
+    bool vCAS(ll_Node<KeyT, ValT> *node, ValT old_value, ValT new_value, Vnode<ValT> *new_node, Vnode<ValT> *head, Vnode<ValT> *vnext, TrackerList *version_tracker, thread_id_t tid)
     {
         auto guard = llRecMgr->getGuard(tid);
         if (head->value != old_value)
@@ -154,19 +154,19 @@ public:
     }
 };
 
-template <typename K, typename V>
-bool Linked_List<K, V>::collect(std::vector<K> *keys,std::vector<Vnode<V> *> *version_lists, thread_id_t tid)
+template <typename KeyT, typename ValT>
+bool Linked_List<KeyT, ValT>::collect(std::vector<KeyT> *keys,std::vector<Vnode<ValT> *> *version_lists, thread_id_t tid)
 {   
     if(isReclaimed) return false;
     auto guard = llRecMgr->getGuard(tid);
     
-    ll_Node<K, V> *left_node = head;
+    ll_Node<KeyT, ValT> *left_node = head;
     if (!is_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst)))
     {
         while (true)
         {
-            ll_Node<K, V> *curr_next = left_node->next.load(std::memory_order_seq_cst);
-            if (!left_node->next.compare_exchange_strong(curr_next, (ll_Node<K, V> *)set_freeze((long)curr_next)))
+            ll_Node<KeyT, ValT> *curr_next = left_node->next.load(std::memory_order_seq_cst);
+            if (!left_node->next.compare_exchange_strong(curr_next, (ll_Node<KeyT, ValT> *)set_freeze((long)curr_next)))
                 continue;
             break;
         }
@@ -176,21 +176,21 @@ bool Linked_List<K, V>::collect(std::vector<K> *keys,std::vector<Vnode<V> *> *ve
     {
         while (true)
         {
-            Vnode<V> *curr_vhead = left_node->vhead.load(std::memory_order_seq_cst);
-            if (!left_node->vhead.compare_exchange_strong(curr_vhead, (Vnode<V> *)set_freeze((long)curr_vhead)))
+            Vnode<ValT> *curr_vhead = left_node->vhead.load(std::memory_order_seq_cst);
+            if (!left_node->vhead.compare_exchange_strong(curr_vhead, (Vnode<ValT> *)set_freeze((long)curr_vhead)))
                 continue;
             break;
         }
     }
-    left_node = (ll_Node<K, V> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
+    left_node = (ll_Node<KeyT, ValT> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
     while (unset_mark((long)left_node->next.load(std::memory_order_seq_cst)))
     {
         if (!is_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst)))
         {
             while (true)
             {
-                ll_Node<K, V> *curr_next = left_node->next.load(std::memory_order_seq_cst);
-                if (!left_node->next.compare_exchange_strong(curr_next, (ll_Node<K, V> *)set_freeze((long)curr_next)))
+                ll_Node<KeyT, ValT> *curr_next = left_node->next.load(std::memory_order_seq_cst);
+                if (!left_node->next.compare_exchange_strong(curr_next, (ll_Node<KeyT, ValT> *)set_freeze((long)curr_next)))
                     continue;
                 break;
             }
@@ -200,13 +200,13 @@ bool Linked_List<K, V>::collect(std::vector<K> *keys,std::vector<Vnode<V> *> *ve
         {
             while (true)
             {
-                Vnode<V> *curr_vhead = left_node->vhead.load(std::memory_order_seq_cst);
-                if (!left_node->vhead.compare_exchange_strong(curr_vhead, (Vnode<V> *)set_freeze((long)curr_vhead)))
+                Vnode<ValT> *curr_vhead = left_node->vhead.load(std::memory_order_seq_cst);
+                if (!left_node->vhead.compare_exchange_strong(curr_vhead, (Vnode<ValT> *)set_freeze((long)curr_vhead)))
                     continue;
                 break;
             }
         }
-        Vnode<V> *left_node_vhead = (Vnode<V> *)get_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
+        Vnode<ValT> *left_node_vhead = (Vnode<ValT> *)get_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
 
         if(!isReclaimed){
             (*keys).push_back(left_node->key);
@@ -215,27 +215,27 @@ bool Linked_List<K, V>::collect(std::vector<K> *keys,std::vector<Vnode<V> *> *ve
         }
         else return false;
 
-        left_node = (ll_Node<K, V> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
-        //        Vnode<V> *left_node_vhead = (Vnode<V>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
+        left_node = (ll_Node<KeyT, ValT> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
+        //        Vnode<ValT> *left_node_vhead = (Vnode<ValT>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
     }
     return true;
 }
 
-template <typename K, typename V>
-int Linked_List<K, V>::range_query(int64_t low, int64_t remaining, int64_t curr_ts, std::vector<std::pair<K, V>> &res, TrackerList *version_tracker, thread_id_t tid)
+template <typename KeyT, typename ValT>
+int Linked_List<KeyT, ValT>::range_query(int64_t low, int64_t remaining, int64_t curr_ts, std::vector<std::pair<KeyT, ValT>> &res, TrackerList *version_tracker, thread_id_t tid)
 {
 
-    ll_Node<K, V> *left_node = (ll_Node<K, V> *)get_unfreezed_unmarked_ref((long)head->next.load(std::memory_order_seq_cst));
-    ll_Node<K, V> *left_next = (ll_Node<K, V> *)get_unfreezed_unmarked_ref((long)left_node->next.load(std::memory_order_seq_cst));
+    ll_Node<KeyT, ValT> *left_node = (ll_Node<KeyT, ValT> *)get_unfreezed_unmarked_ref((long)head->next.load(std::memory_order_seq_cst));
+    ll_Node<KeyT, ValT> *left_next = (ll_Node<KeyT, ValT> *)get_unfreezed_unmarked_ref((long)left_node->next.load(std::memory_order_seq_cst));
     while (left_next && left_node->key < low)
     {
         // std::cout<<"Range query in level bin"<<std::endl;
         left_node = left_next;
-        left_next = (ll_Node<K, V> *)get_unfreezed_unmarked_ref((long)left_next->next.load(std::memory_order_seq_cst));
+        left_next = (ll_Node<KeyT, ValT> *)get_unfreezed_unmarked_ref((long)left_next->next.load(std::memory_order_seq_cst));
     }
     while (left_next && remaining > 0)
     {
-        Vnode<V> *curr_vhead = (Vnode<V> *)get_unfreezed_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
+        Vnode<ValT> *curr_vhead = (Vnode<ValT> *)get_unfreezed_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
         init_ts(curr_vhead, version_tracker, tid);
         while (curr_vhead && curr_vhead->ts >= curr_ts)
             curr_vhead = curr_vhead->nextv;
@@ -248,38 +248,38 @@ int Linked_List<K, V>::range_query(int64_t low, int64_t remaining, int64_t curr_
                 break;
         }
         left_node = left_next;
-        left_next = (ll_Node<K, V> *)get_unfreezed_unmarked_ref((long)left_next->next.load(std::memory_order_seq_cst));
+        left_next = (ll_Node<KeyT, ValT> *)get_unfreezed_unmarked_ref((long)left_next->next.load(std::memory_order_seq_cst));
     }
     return remaining;
 }
 
-template <typename K, typename V>
-bool Linked_List<K, V>::search(K key, V value, thread_id_t tid)
+template <typename KeyT, typename ValT>
+bool Linked_List<KeyT, ValT>::search(KeyT key, ValT value, thread_id_t tid)
 { // CHANGED CHECK:inserted value fieled
     auto guard = llRecMgr->getGuard(tid);
-    ll_Node<K, V> *curr = head;
+    ll_Node<KeyT, ValT> *curr = head;
     // std::cout<<"LL search"<<std::endl;
     while (curr->key < key)
-        curr = (ll_Node<K, V> *)unset_freeze_mark((long)curr->next.load(std::memory_order_seq_cst));
+        curr = (ll_Node<KeyT, ValT> *)unset_freeze_mark((long)curr->next.load(std::memory_order_seq_cst));
 
     return (curr->key == key && curr->vhead.load(std::memory_order_seq_cst)->value == value && !is_marked_ref((long)curr->next.load(std::memory_order_seq_cst)));
 }
 
-template <typename K, typename V>
-ll_Node<K, V> *Linked_List<K, V>::find(K key, ll_Node<K, V> **left_node, thread_id_t tid)
+template <typename KeyT, typename ValT>
+ll_Node<KeyT, ValT> *Linked_List<KeyT, ValT>::find(KeyT key, ll_Node<KeyT, ValT> **left_node, thread_id_t tid)
 {
     auto guard = llRecMgr->getGuard(tid);
 
     while (true)
     {
         (*left_node) = head;
-        ll_Node<K, V> *right_node;
+        ll_Node<KeyT, ValT> *right_node;
         if (is_freeze((uintptr_t)(*left_node)->next.load(std::memory_order_seq_cst)))
             return nullptr;
-        right_node = (ll_Node<K, V> *)unset_freeze_mark((long)(*left_node)->next.load(std::memory_order_seq_cst));
+        right_node = (ll_Node<KeyT, ValT> *)unset_freeze_mark((long)(*left_node)->next.load(std::memory_order_seq_cst));
         while (true)
         {
-            ll_Node<K, V> *right_next = right_node->next.load(std::memory_order_seq_cst);
+            ll_Node<KeyT, ValT> *right_next = right_node->next.load(std::memory_order_seq_cst);
             if (is_freeze((uintptr_t)right_next))
             {
                 return nullptr;
@@ -287,13 +287,13 @@ ll_Node<K, V> *Linked_List<K, V>::find(K key, ll_Node<K, V> **left_node, thread_
             if (right_node->key >= key)
                 return right_node;
             (*left_node) = right_node;
-            right_node = (ll_Node<K, V> *)get_unmarked_ref((long)right_next);
+            right_node = (ll_Node<KeyT, ValT> *)get_unmarked_ref((long)right_next);
         }
     }
 }
 
-template <typename K, typename V>
-int Linked_List<K, V>::insert(K key, V value, TrackerList *version_tracker, thread_id_t tid)
+template <typename KeyT, typename ValT>
+int Linked_List<KeyT, ValT>::insert(KeyT key, ValT value, TrackerList *version_tracker, thread_id_t tid)
 {
     auto guard = llRecMgr->getGuard(tid);
     //    return -1 for failed operation,0 for no incremenet,1 for sucess,-2 for retraining,
@@ -303,15 +303,15 @@ int Linked_List<K, V>::insert(K key, V value, TrackerList *version_tracker, thre
 
     while (true)
     { // std::cout<<"Insert at Linked List"<<std::endl;
-        ll_Node<K, V> *prev_node = nullptr;
-        ll_Node<K, V> *right_node = find(key, &prev_node, tid);
+        ll_Node<KeyT, ValT> *prev_node = nullptr;
+        ll_Node<KeyT, ValT> *right_node = find(key, &prev_node, tid);
         if (right_node == nullptr)
             return -1;
         if (right_node->key == key)
         {
             while (true)
             {
-                V curr_value = read(right_node, version_tracker, tid);
+                ValT curr_value = read(right_node, version_tracker, tid);
                 if (curr_value == value)
                     return 0;
                 if (vCAS(right_node, curr_value, value, version_tracker, tid))
@@ -325,8 +325,8 @@ int Linked_List<K, V>::insert(K key, V value, TrackerList *version_tracker, thre
         if (value == -1)
             return 0;
 
-        // ll_Node<K, V> *new_node = new ll_Node<K, V>(key, value);
-        ll_Node<K, V> *new_node = llRecMgr->template allocate<ll_Node<K, V>>(tid);
+        // ll_Node<KeyT, ValT> *new_node = new ll_Node<KeyT, ValT>(key, value);
+        ll_Node<KeyT, ValT> *new_node = llRecMgr->template allocate<ll_Node<KeyT, ValT>>(tid);
         new_node->init(key, value);
         new_node->next.store(right_node);
 
@@ -340,33 +340,33 @@ int Linked_List<K, V>::insert(K key, V value, TrackerList *version_tracker, thre
     }
 }
 
-template <typename K, typename V>
-int Linked_List<K, V>::remove(K key, TrackerList *version_tracker, thread_id_t tid)
+template <typename KeyT, typename ValT>
+int Linked_List<KeyT, ValT>::remove(KeyT key, TrackerList *version_tracker, thread_id_t tid)
 {
     auto guard = llRecMgr->getGuard(tid);
     return insert(key, -1, version_tracker, tid); // CHANGE
 }
 
-template <typename K, typename V>
-void Linked_List<K, V>::reclaimMem(int64_t tstamp_threshold, thread_id_t tid)
+template <typename KeyT, typename ValT>
+void Linked_List<KeyT, ValT>::reclaimMem(int64_t tstamp_threshold, thread_id_t tid)
 {
     auto guard = llRecMgr->getGuard(tid);
 
-    ll_Node<K, V> *left_node = head, *prev_node = nullptr;
+    ll_Node<KeyT, ValT> *left_node = head, *prev_node = nullptr;
     assert (is_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst)));
    
     prev_node = left_node;
-    left_node = (ll_Node<K, V> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
+    left_node = (ll_Node<KeyT, ValT> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
     while (unset_mark((long)left_node->next.load(std::memory_order_seq_cst)))
     {
         assert (is_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst)));
         
-        Vnode<V> *left_node_vhead = (Vnode<V> *)get_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
+        Vnode<ValT> *left_node_vhead = (Vnode<ValT> *)get_unmarked_ref((uintptr_t)left_node->vhead.load(std::memory_order_seq_cst));
 
-        Vnode<V> *left_vnode = left_node_vhead, *curr_vnode = nullptr;
+        Vnode<ValT> *left_vnode = left_node_vhead, *curr_vnode = nullptr;
         while (unset_freeze((long)left_vnode->nextv.load(std::memory_order_seq_cst)))
         {
-            curr_vnode = (Vnode<V> *)unset_freeze((long)left_vnode->nextv.load(std::memory_order_seq_cst));
+            curr_vnode = (Vnode<ValT> *)unset_freeze((long)left_vnode->nextv.load(std::memory_order_seq_cst));
             // std::cout << curr_vnode->ts << " " << tstamp_threshold << std::endl;
             if (curr_vnode->ts <= tstamp_threshold)
             {
@@ -381,8 +381,8 @@ void Linked_List<K, V>::reclaimMem(int64_t tstamp_threshold, thread_id_t tid)
             prev_node->next = nullptr;
         llRecMgr->template retire(tid, left_node);
         prev_node = left_node;
-        left_node = (ll_Node<K, V> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
-        //        Vnode<V> *left_node_vhead = (Vnode<V>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
+        left_node = (ll_Node<KeyT, ValT> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
+        //        Vnode<ValT> *left_node_vhead = (Vnode<ValT>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
     }
     llRecMgr->template retire(tid, head);
     head = nullptr;
