@@ -24,10 +24,10 @@ thread_local std::uniform_int_distribution<int> dice(1, 10);
 thread_local std::random_device rd;
 thread_local std::mt19937 gen(rd());
 
-template<typename V>
+template<typename ValT>
 class Vnode{
 public:
-    V value;
+    ValT value;
     std::atomic<int64_t> ts;
     std::atomic<Vnode*> nextv;
     Vnode(){
@@ -35,50 +35,50 @@ public:
         nextv.store(nullptr);
         ts = -1;
     }
-    Vnode(V val){
+    Vnode(ValT val){
         this -> value = val;
         nextv.store(nullptr);
         ts = -1;
     }
-    Vnode(V val, Vnode<V>* n){
+    Vnode(ValT val, Vnode<ValT>* n){
         this -> value = val;
         nextv.store(n);
         ts = -1;
     }
-    void init(V val, Vnode<V>* n = nullptr) {
+    void init(ValT val, Vnode<ValT>* n = nullptr) {
         this -> value = val;
         nextv.store(n);
         ts = -1;
     }
 };
 
-template<typename K, typename V>
+template<typename KeyT, typename ValT>
 class ll_Node{
 public:
-    K key;
-    std::atomic<Vnode<V>*> vhead;
-    std::atomic<ll_Node<K,V>*> next;
+    KeyT key;
+    std::atomic<Vnode<ValT>*> vhead;
+    std::atomic<ll_Node<KeyT,ValT>*> next;
     std::atomic<int64_t> del;
     // TODO: Delete this
-    ll_Node(K key, V value)
+    ll_Node(KeyT key, ValT value)
     {
         this -> key = key;
-        Vnode<V> *temp = new Vnode(value);
+        Vnode<ValT> *temp = new Vnode(value);
         vhead.store(temp, std::memory_order_seq_cst);
         next.store(nullptr, std::memory_order_seq_cst);
         del = 0;
     }
 
     /*
-    ll_Node(K key, V value, ll_Node<K,V>* next)
+    ll_Node(KeyT key, ValT value, ll_Node<KeyT,ValT>* next)
     {
         this -> key = key;
-        Vnode<V> *temp = new Vnode<V>(value);
+        Vnode<ValT> *temp = new Vnode<ValT>(value);
         vhead.store(temp, std::memory_order_seq_cst);
         this -> next.store(next, std::memory_order_seq_cst);
         del = 0;
     }
-    ll_Node(K key, Vnode<V>* vhead, ll_Node<K,V>* next)
+    ll_Node(KeyT key, Vnode<ValT>* vhead, ll_Node<KeyT,ValT>* next)
     {
         this -> key = key;
         this -> vhead.store(vhead, std::memory_order_seq_cst);
@@ -87,9 +87,9 @@ public:
     }
     */
     ll_Node() {}
-    void init(K key, V value) {
+    void init(KeyT key, ValT value) {
         this -> key = key;
-        Vnode<V> *temp = new Vnode(value);
+        Vnode<ValT> *temp = new Vnode(value);
         vhead.store(temp, std::memory_order_seq_cst);
         next.store(nullptr, std::memory_order_seq_cst);
         del = 0;
