@@ -16,7 +16,7 @@
 
 TrackerList version_tracker;
 
-
+namespace kanva_RS {
 
 
 
@@ -89,6 +89,6 @@ private:
 
 };
 
-
+}
 
 #endif
