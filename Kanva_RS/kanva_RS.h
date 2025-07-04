@@ -4,8 +4,8 @@
 #include "util.h"
 /*#include "plex_model.h"
 #include "plex_model_impl.h"*/
-#include "lr_model.h"
-#include "lr_model_impl.h"
+#include "../common/lr_model.h"
+#include "../common/lr_model_impl.h"
 #include "kanva_RS_model.h"
 #include "kanva_RS_model_impl.h"
 
