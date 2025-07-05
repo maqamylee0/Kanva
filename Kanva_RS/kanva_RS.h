@@ -8,6 +8,7 @@
 #include "../common/lr_model_impl.h"
 #include "kanva_RS_model.h"
 #include "kanva_RS_model_impl.h"
+#include "../common/util.h"
 
 #include "piecewise_linear_model.h"
 #include "Uruv/VersionTracker/TrackerList.h"
@@ -90,5 +91,5 @@ private:
 };
 
 }
-
+#include "kanva_RS_impl.h"
 #endif

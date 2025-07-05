@@ -336,7 +336,7 @@ size_t make_segmentation_data(size_t n, size_t epsilon, Fin in, Fout out, plexmo
 
     using X = typename std::invoke_result_t<Fin, size_t>::first_type;
     using Y = typename std::invoke_result_t<Fin, size_t>::second_type;
-    using canonical_segment = typename OptimalPiecewiseLinearModel<key_type, size_t>::CanonicalSegment;
+    using canonical_segment = typename OptimalPiecewiseLinearModel<key_t, size_t>::CanonicalSegment;
     size_t c = 0;
     size_t start = 0;
     auto p = in(0);
