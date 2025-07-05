@@ -7,7 +7,7 @@
 #include "kanva_RS_model_impl.h"
 #include "piecewise_linear_model.h"
 
-
+namespace kanva_RS {
 
 template<class key_t, class val_t>
 inline Kanva_RS<key_t, val_t>::Kanva_RS(int num_threads)
@@ -277,7 +277,7 @@ size_t Kanva_RS<key_t, val_t>::model_size(thread_id_t tid){
     return segments.size();
 }
 
-
+}
 
 
 

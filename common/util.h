@@ -11,6 +11,8 @@
 #include "thread"
 #include "unistd.h"
 
+namespace kanva_RS {
+
 typedef uint64_t key_type;
 typedef uint64_t val_type;
 #define COUT_THIS(this) std::cout << this << std::endl;
@@ -89,5 +91,6 @@ static int binary_search_branchless(const KEY_TYPE *arr, int n, KEY_TYPE key) {
     pos += 1;
 
     return (int) (arr[pos] >= key ? pos : n);
+}
 }
 #endif //KANVA_UTIL_H
