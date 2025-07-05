@@ -241,7 +241,7 @@ template<class key_t, class val_t>
 inline result_t Kanva_RS<key_t, val_t>::update(
         const key_t& key, const val_t& val, thread_id_t tid)
 {   //Not used anywhere
-    return find_model(key, tid)[0].update(key, val, tid) ? result_t::ok : result_t::failed;
+    return find_model(key, tid)[0].update(key, val, tid);
     //return find_model(key)[0].con_insert(key, val);
 }
 
