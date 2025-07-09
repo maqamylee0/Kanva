@@ -291,7 +291,7 @@ size_t make_segmentation(size_t n, size_t epsilon, Fin in, Fout out) {
     size_t start = 0;
     auto p = in(0);
 
-    OptimalPiecewiseLinearModel<X, Y> opt(epsilon);
+    kanva_RS::OptimalPiecewiseLinearModel<X, Y> opt(epsilon);
     opt.add_point(p.first, p.second);
 
     for (size_t i = 1; i < n; ++i) {
@@ -314,7 +314,7 @@ size_t make_segmentation(size_t n, size_t epsilon, Fin in, Fout out) {
 template<typename RandomIt>
 auto make_segmentation(RandomIt first, RandomIt last, size_t epsilon) {
     using key_type = typename RandomIt::value_type;
-    using canonical_segment = typename OptimalPiecewiseLinearModel<key_type, size_t>::CanonicalSegment;
+    using canonical_segment = typename kanva_RS::OptimalPiecewiseLinearModel<key_type, size_t>::CanonicalSegment;
     using pair_type = typename std::pair<key_type, size_t>;
 
     size_t n = std::distance(first, last);
@@ -336,12 +336,12 @@ size_t make_segmentation_data(size_t n, size_t epsilon, Fin in, Fout out, plexmo
 
     using X = typename std::invoke_result_t<Fin, size_t>::first_type;
     using Y = typename std::invoke_result_t<Fin, size_t>::second_type;
-    using canonical_segment = typename OptimalPiecewiseLinearModel<key_t, size_t>::CanonicalSegment;
+    using canonical_segment = typename kanva_RS::OptimalPiecewiseLinearModel<key_t, size_t>::CanonicalSegment;
     size_t c = 0;
     size_t start = 0;
     auto p = in(0);
 
-    OptimalPiecewiseLinearModel<X, Y> opt(epsilon);
+    kanva_RS::OptimalPiecewiseLinearModel<X, Y> opt(epsilon);
     opt.add_point(p.first, p.second);
     std::vector<X> keys;
     keys.push_back(p.first);
