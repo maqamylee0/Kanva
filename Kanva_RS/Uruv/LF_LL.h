@@ -370,22 +370,26 @@ void Linked_List<KeyT, ValT>::reclaimMem(int64_t tstamp_threshold, thread_id_t t
             // std::cout << curr_vnode->ts << " " << tstamp_threshold << std::endl;
             if (curr_vnode->ts <= tstamp_threshold)
             {
-                left_vnode->nextv = nullptr;
+                // Don't nullify pointers - let record manager handle it
+                // left_vnode->nextv = nullptr;
                 vnodeRecMgr->template retire(tid, curr_vnode);
                 // std::cout << "Retiring\n";
             }
             left_vnode = curr_vnode;
         }
-        left_node->vhead = nullptr;
-        if(prev_node)
-            prev_node->next = nullptr;
+        // Don't nullify pointers before retirement - causes race conditions
+        // left_node->vhead = nullptr;
+        // if(prev_node)
+        //     prev_node->next = nullptr;
         llRecMgr->template retire(tid, left_node);
         prev_node = left_node;
         left_node = (ll_Node<KeyT, ValT> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
         //        Vnode<ValT> *left_node_vhead = (Vnode<ValT>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
     }
-    llRecMgr->template retire(tid, head);
-    head = nullptr;
+    // Don't retire head - it's the anchor point for the entire list
+    // llRecMgr->template retire(tid, head);
+    // Don't nullify head - let record manager handle cleanup
+    // head = nullptr;
 }
 
 #endif // UNTITLED_LF_LL_H
