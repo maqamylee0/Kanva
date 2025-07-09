@@ -10,7 +10,7 @@
 using LargeSigned = typename std::conditional_t<std::is_floating_point_v<T>,
                                                 long double,
                                                 std::conditional_t<(sizeof(T) < 8), int64_t, __int128>>;*/
-
+namespace kanva_RS {
 template<typename T>
 using LargeSigned = __int128;
 
@@ -381,4 +381,5 @@ size_t make_segmentation_data(size_t n, size_t epsilon, Fin in, Fout out, plexmo
     plexmodel_type model();
     out(model, keys.begin(), keys.begin(), keys.size(), epsilon);
     return ++c;
+}
 }

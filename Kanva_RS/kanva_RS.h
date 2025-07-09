@@ -26,7 +26,7 @@ class Kanva_RS{
 public:
     typedef kanva_RS::Kanva_RSModel<key_t, val_t> kanva_RSmodel_type;
     typedef LinearRegressionModel<key_t> lrmodel_type;
-    typedef typename OptimalPiecewiseLinearModel<key_t, size_t>::CanonicalSegment canonical_segment;
+    typedef typename kanva_RS::OptimalPiecewiseLinearModel<key_t, size_t>::CanonicalSegment canonical_segment;
     typedef record_manager<
         reclaimer_debra<key_t>,
         allocator_new<key_t>,
