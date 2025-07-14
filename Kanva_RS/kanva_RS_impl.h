@@ -2,13 +2,13 @@
 #define __KANVA_RS_IMPL_H__
 
 #include "kanva_RS.h"
-#include "util.h"
+#include "../common/util.h"
 #include "kanva_RS_model.h"
 #include "kanva_RS_model_impl.h"
 #include "piecewise_linear_model.h"
 
 
-
+namespace kanva_RS {
 template<class key_t, class val_t>
 inline Kanva_RS<key_t, val_t>::Kanva_RS(int num_threads)
     : maxErr(64), learning_step(1000), learning_rate(0.1), llRecMgr(new ll_record_manager_t(num_threads)), vnodeRecMgr(new vnode_record_manager_t(num_threads))
@@ -278,7 +278,7 @@ size_t Kanva_RS<key_t, val_t>::model_size(thread_id_t tid){
 }
 
 
-
+}
 
 
 #endif

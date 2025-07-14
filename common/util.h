@@ -11,6 +11,7 @@
 #include "thread"
 #include "unistd.h"
 
+namespace kanva_RS {
 typedef uint64_t key_type;
 typedef uint64_t val_type;
 #define COUT_THIS(this) std::cout << this << std::endl;
@@ -75,6 +76,8 @@ return 31 - __builtin_clz(x);
 template<typename KEY_TYPE>
 static int binary_search_branchless(const KEY_TYPE *arr, int n, KEY_TYPE key) {
 //static int binary_search_branchless(const int *arr, int n, int key) {
+    if (n <= 0) return 0;
+    if (n == 1) return (arr[0] >= key ? 0 : 1);
     intptr_t pos = -1;
     intptr_t logstep = bsr(n - 1);
     intptr_t step = intptr_t(1) << logstep;
@@ -89,5 +92,6 @@ static int binary_search_branchless(const KEY_TYPE *arr, int n, KEY_TYPE key) {
     pos += 1;
 
     return (int) (arr[pos] >= key ? pos : n);
+}
 }
 #endif //KANVA_UTIL_H

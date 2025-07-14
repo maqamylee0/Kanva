@@ -3,8 +3,9 @@
 
 /*#include "plex_model.h"
 #include "plex_model_impl.h"*/
-#include "lr_model.h"
-#include "lr_model_impl.h"
+#include "../common/lr_model.h"
+#include "../common/lr_model_impl.h"
+#include "../common/util.h"
 #include "util.h"
 #include "Uruv/LF_LL.h"
 #include "Uruv/VersionTracker/TrackerList.h"

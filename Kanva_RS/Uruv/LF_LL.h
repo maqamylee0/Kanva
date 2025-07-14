@@ -12,6 +12,8 @@
 #include "util.h"
 #include "common/recordmgr/record_manager.h"
 
+
+namespace kanva_RS {
 // without sentinel
 #define threshhold 10
 
@@ -64,6 +66,9 @@ public:
 
     // bool search(K key, V value);
     bool search(K key, V value, thread_id_t tid);
+
+    // New method for finding a key and returning its value
+    bool find_value(K key, V &value, thread_id_t tid);
 
     bool collect(std::vector<K> *,std::vector<Vnode<V> *>*,  thread_id_t tid);
 
@@ -370,22 +375,23 @@ void Linked_List<K, V>::reclaimMem(int64_t tstamp_threshold, thread_id_t tid)
             // std::cout << curr_vnode->ts << " " << tstamp_threshold << std::endl;
             if (curr_vnode->ts <= tstamp_threshold)
             {
-                left_vnode->nextv = nullptr;
+                // left_vnode->nextv = nullptr;
                 vnodeRecMgr->template retire(tid, curr_vnode);
                 // std::cout << "Retiring\n";
             }
             left_vnode = curr_vnode;
         }
-        left_node->vhead = nullptr;
-        if(prev_node)
-            prev_node->next = nullptr;
+        // left_node->vhead = nullptr;
+        // Don't nullify prev_node->next - causes race conditions
+        // if(prev_node)
+        //     prev_node->next = nullptr;
         llRecMgr->template retire(tid, left_node);
         prev_node = left_node;
         left_node = (ll_Node<K, V> *)unset_freeze((uintptr_t)left_node->next.load(std::memory_order_seq_cst));
         //        Vnode<V> *left_node_vhead = (Vnode<V>*) get_unmarked_ref((uintptr_t)left_node -> vhead.load(std::memory_order_seq_cst));
     }
-    llRecMgr->template retire(tid, head);
-    head = nullptr;
+    // llRecMgr->template retire(tid, head);
+    // head = nullptr;
 }
-
+}
 #endif // UNTITLED_LF_LL_H

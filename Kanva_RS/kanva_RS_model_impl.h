@@ -2,7 +2,7 @@
 #define __KANVA_RS_MODEL_IMPL_H__
 
 #include "kanva_RS_model.h"
-#include "util.h"
+#include "../common/util.h"
 
 
 namespace kanva_RS{
@@ -192,9 +192,13 @@ bool Kanva_RSModel<key_t, val_t>::find_retrain(const key_t &key, val_t &val, thr
     pos = locate_in_levelbin(key, pos, tid);
     //if(key == keys[pos]){
     if(key==model_array[pos]->key){
-         
-        if(model_array[pos]->getValue()==val) return true;
-        return false;
+        val_t retrieved_val = model_array[pos]->getValue();
+        // Check if the value is valid
+        if (retrieved_val != (val_t)-1) {
+            val = retrieved_val;  // Set the output value
+            return true;          // Found the key
+        }
+        return false; // Key exists but value is invalid/deleted
     }
     int bin_pos = key<model_array[pos]->key?pos:(pos+1);
     model_or_bin_t *mob;

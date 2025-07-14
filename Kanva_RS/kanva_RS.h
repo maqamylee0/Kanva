@@ -1,11 +1,11 @@
 #ifndef __KANVA_RS_H__
 #define __KANVA_RS_H__
 
-#include "util.h"
+#include "../common/util.h"
 /*#include "plex_model.h"
 #include "plex_model_impl.h"*/
-#include "lr_model.h"
-#include "lr_model_impl.h"
+#include "../common/lr_model.h"
+#include "../common/lr_model_impl.h"
 #include "kanva_RS_model.h"
 #include "kanva_RS_model_impl.h"
 
@@ -19,7 +19,7 @@ TrackerList version_tracker;
 
 
 
-
+namespace kanva_RS {
 template<class key_t, class val_t>
 class Kanva_RS{
 public:
@@ -89,6 +89,7 @@ private:
 
 };
 
-
+}
+#include "kanva_RS_impl.h"
 
 #endif
