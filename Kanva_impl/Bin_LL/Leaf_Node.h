@@ -4,6 +4,7 @@
 #include "Node.h"
 //#include "Root_Node.h"
 
+namespace kanva_impl {
 template<typename K, typename V>
 class leaf_node: public Node<int64_t, int64_t>{
 public:
@@ -16,6 +17,7 @@ public:
         is_leaf = true;
     }
 };
+}
 
 //template<typename K, typename V>
 //Node<K,V>* leaf_node<K,V>::insert(K key, V value) {

@@ -5,6 +5,7 @@
 //#include "Leaf_Node.h"
 #include "util1.h"
 
+namespace kanva_impl {
 template<typename K, typename V>
 class Internal_Node : public Node<int64_t, int64_t>
 {
@@ -24,6 +25,6 @@ public:
     Node<K,V>* insert(K key, V value);
 };
 
-
+}
 
 #endif //BIN_LL_ROOT_NODE_H

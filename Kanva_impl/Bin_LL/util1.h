@@ -8,6 +8,7 @@
 #include<stdint.h>
 //#include "VersionTracker/TrackerList.h"
 
+// namespace kanva_impl {
 const int64_t child_max = 32;
 const int64_t root_max = 32;
 
@@ -141,5 +142,5 @@ long get_unmarked_ref(long w)
 }
 //
 //TrackerList version_tracker;
-
+//}
 #endif //UNTITLED_UTIL_H

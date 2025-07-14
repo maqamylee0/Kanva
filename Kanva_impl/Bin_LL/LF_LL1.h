@@ -11,6 +11,7 @@
 #include "util1.h"
 
 
+namespace kanva_impl {
 template<typename K, typename V>
 class Linked_List {
 public:
@@ -125,7 +126,7 @@ int Linked_List<K,V>::insert(K key, V value) {
     }
 }
 
-
+}
 
 
 

@@ -1,12 +1,13 @@
 #ifndef KANVA_KANVA_H
 #define KANVA_KANVA_H
-#include "util.h"
-#include "lr_model.h"
-#include "lr_model_impl.h"
+#include "../common/util.h"
+#include "../common/lr_model.h"
+#include "../common/lr_model_impl.h"
 #include "kanva_model.h"
 #include "kanva_model_impl.h"
 
 
+namespace kanva_impl {
 template<class key_t, class val_t>
 class Kanva{
 public:
@@ -47,5 +48,5 @@ private:
     float learning_rate = 0.1;
 };
 
-
+}
 #endif //KANVA_KANVA_H

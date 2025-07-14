@@ -1,10 +1,11 @@
 #ifndef KANVA_KANVA_MODEL_H
 #define KANVA_KANVA_MODEL_H
-#include "lr_model.h"
-#include "lr_model_impl.h"
-#include "util.h"
+#include "../common/lr_model.h"
+#include "../common/lr_model_impl.h"
+#include "../common/util.h"
 #include "Bin_LL/Bin.h"
 
+namespace kanva_impl {
 template<class key_t, class val_t>
 class KanvaModel {
 public:
@@ -58,4 +59,5 @@ private:
     std::atomic<model_or_bin_t*>* mobs_lf = nullptr;
     const size_t capacity;
 };
+}
 #endif //KANVA_KANVA_MODEL_H

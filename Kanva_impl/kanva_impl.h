@@ -4,6 +4,7 @@
 #include "kanva_model.h"
 #include "kanva_model_impl.h"
 
+namespace kanva_impl {
 template<class key_t, class val_t>
 inline Kanva<key_t, val_t>::Kanva()
 {
@@ -124,7 +125,7 @@ template<class key_t, class val_t>
 typename Kanva<key_t, val_t>::kanvamodel_type * Kanva<key_t, val_t>::find_model(const key_t &key)
 {
     // root
-    size_t model_pos = binary_search_branchless(&model_keys[0], model_keys.size(), key);
+    size_t model_pos = kanva_RS::binary_search_branchless(&model_keys[0], model_keys.size(), key);
     if(model_pos >= aimodels.size())
         model_pos = aimodels.size()-1;
     return &aimodels[model_pos];
@@ -182,5 +183,5 @@ inline bool Kanva<key_t, val_t>::remove(const key_t& key)
 
     //return find_model(key)[0].con_insert(key, val);
 }
-
+}
 #endif //KANVA_KANVA_IMPL_H

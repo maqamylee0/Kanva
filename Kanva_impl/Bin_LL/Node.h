@@ -11,7 +11,7 @@
 #include "LF_LL.h"
 
 
-
+namespace kanva_impl {
 template<typename K, typename V>
 class Node{
 public:
@@ -19,4 +19,5 @@ public:
     std::atomic<int64_t> count;
 //    virtual void mark() = 0;
 };
+}
 #endif //BIN_LL_NODE_H

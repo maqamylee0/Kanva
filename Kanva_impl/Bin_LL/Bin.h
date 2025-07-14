@@ -5,6 +5,7 @@
 #include "Leaf_Node.h"
 #include "Root_Node.h"
 
+namespace kanva_impl {
 template<typename K, typename V>
 class Bin {
 public:
@@ -35,6 +36,8 @@ public:
 template<typename K, typename V>
 V Bin<K,V>::search(K key) {
     Node<K,V>* curr_root = (Node<K,V>*)unset_mark((long) root.load(std::memory_order_seq_cst));
+    if(curr_root == nullptr) return V{}; // Return default value if root is null
+    
     if(curr_root -> is_leaf)
         return ((leaf_node<K,V>*) curr_root) -> data_array_list.search(key);
     Internal_Node<K,V>* node = (Internal_Node<K,V>*) curr_root;
@@ -91,10 +94,16 @@ Node<K,V>* Bin<K,V>::remove_leaf(K key, leaf_node<K,V>* current_child) {
 template<typename K, typename V>
 void Bin<K,V>::collect(std::vector<K> &keys, std::vector<V> &Vals) {
     Node<K,V>* curr_root = (Node<K,V>*)unset_mark((long) root.load(std::memory_order_seq_cst));
-    for(int i = 0; i <= curr_root -> count; i++)
-    {
-        leaf_node<K,V>* curr_child = (leaf_node<K,V>*) ((Internal_Node<K,V>*)curr_root) ->ptr[i];
-        curr_child -> data_array_list.collect(keys, Vals);
+    if(curr_root -> is_leaf) {
+        // If root is a leaf node, collect directly from it
+        ((leaf_node<K,V>*) curr_root) -> data_array_list.collect(keys, Vals);
+    } else {
+        // If root is an internal node, iterate through its children
+        for(int i = 0; i <= curr_root -> count; i++)
+        {
+            leaf_node<K,V>* curr_child = (leaf_node<K,V>*) ((Internal_Node<K,V>*)curr_root) ->ptr[i];
+            curr_child -> data_array_list.collect(keys, Vals);
+        }
     }
 }
 
@@ -334,5 +343,6 @@ bool Bin<K,V>::insert(K key, V value) {
         size++;
         return true;
     }
+}
 }
 #endif //BIN_LL_BIN_H

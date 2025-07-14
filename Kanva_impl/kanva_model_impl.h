@@ -1,8 +1,9 @@
 #ifndef KANVA_KANVA_MODEL_IMPL_H
 #define KANVA_KANVA_MODEL_IMPL_H
 #include "kanva_model.h"
-#include "util.h"
+#include "../common/util.h"
 
+namespace kanva_impl {
 template<class key_t, class val_t>
 KanvaModel<key_t, val_t>::KanvaModel(){
     model = nullptr;
@@ -195,6 +196,7 @@ bool KanvaModel<key_t, val_t>::insert_model_or_bin(const key_t &key, const val_t
             res = ai->insert_retrain(key, val);
             return res;
         }
+        return res; // Return true when insertion was successful
     } else{                   // insert into model
         return mob->mob.ai->insert_retrain(key, val);
     }
@@ -277,5 +279,6 @@ inline size_t KanvaModel<key_t, val_t>::locate_in_levelbin(const key_t &key, con
             end = mid-1;
     }
     return begin;
+}
 }
 #endif //KANVA_KANVA_MODEL_IMPL_H
